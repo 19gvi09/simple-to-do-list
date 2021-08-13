@@ -1,0 +1,171 @@
+body {
+    font-family: 'Open Sans', sans-serif;
+    background: #ff4444;
+}
+
+h2 {
+    display: block;
+    width: 100%;
+    border-bottom: solid #000;
+}
+
+.wrapper {
+    width: 100%;
+    background: #fff;
+    max-width: 450px;
+    margin: 20px auto 0;
+    padding: 10px;
+    height: calc(100vh - 60px);
+}
+
+/* Add-task styles */
+.add-task {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-gap: 8px;
+    margin: 20px 0 0;
+}
+
+.add-task__input {
+    border: 0;
+    border-bottom: solid #000;
+    outline: 0;
+    transition: .5s;
+    font-size: 16px;
+}
+
+.add-task__input:focus {
+    border-bottom: solid #ff4444;
+}
+
+.add-task__button {
+    border: 0;
+    color: #fff;
+    background-color: #ff4444;
+    padding: 8px 16px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/* Tasks-list styles */
+.tasks {
+    display: flex;
+    flex-direction: column;
+    height: 75%;
+}
+
+.tasks__container {
+    max-height: 48%;
+}
+
+.tasks__list {
+    list-style-type: none;
+    list-style-position: inside;
+    padding: 0;
+    overflow-y: scroll;
+    max-height: 80%;
+    scrollbar-width: thin;
+    scrollbar-color: #ff4444 #ffa8a8;
+    border: #ffa8a8 solid 1px;
+}
+
+.tasks__list::-webkit-scrollbar {
+    width: 8px;
+    background-color: #ffa8a8;
+}
+
+.tasks__list::-webkit-scrollbar-button {
+    display: none;
+}
+
+.tasks__list::-webkit-scrollbar-thumb {
+    background-color: #ff4444;
+}
+
+/* Task styles */
+.task {
+    font-size: 24px;
+    padding: 0 0 0 8px;
+    display: flex;
+}
+
+.task:nth-child(odd) {
+    background: #ffe2e2;
+}
+
+.task:hover {
+    background: #ffa8a8;
+}
+
+.task__checkbox {
+    cursor: pointer;
+    margin: 0 10px 0 0;
+    align-self: center;
+}
+
+.task__text {
+    align-self: center;
+    max-width: 324px;
+    word-wrap: break-word;
+}
+
+.task__input {
+    border: 0;
+    border-bottom: solid #000;
+    outline: 0;
+    transition: .5s;
+    background: transparent;
+}
+
+.task__buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    font-size: 16px;
+    margin: 0 0 0 auto;
+}
+
+.task__button {
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    text-align: center;
+    height: 50%;
+}
+
+.task__button:hover {
+    background: #ff4444;
+    color: #fff;
+    transition: .2s;
+}
+
+/* Controls buttons styles */
+.controls {
+    display: flex;
+    justify-content: space-around;
+}
+
+.controls__button {
+    border: 0;
+    color: #fff;
+    background-color: #ff4444;
+    font-size: 16px;
+    cursor: pointer;
+    width: 100%;
+    padding: 15px;
+    margin: 5px;
+}
+
+
+
+
+/* Style for hidden blocks and elements */
+.hidden {
+    display: none;
+}
+
+/* Style for completed task text */
+
+.completed {
+    text-decoration: line-through 2px;
+}
