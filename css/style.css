@@ -10,10 +10,14 @@ h2 {
 }
 
 .wrapper {
-    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     background: #fff;
+    width: 100%;
     max-width: 450px;
-    margin: 20px auto 0;
+    margin: 20px auto;
     padding: 10px;
     height: calc(100vh - 60px);
 }
@@ -51,19 +55,19 @@ h2 {
 .tasks {
     display: flex;
     flex-direction: column;
-    height: 75%;
+    height: 100%;
 }
 
 .tasks__container {
-    max-height: 48%;
+    height: 50%;
 }
 
 .tasks__list {
     list-style-type: none;
     list-style-position: inside;
     padding: 0;
-    overflow-y: scroll;
     max-height: 80%;
+    overflow-y: scroll;
     scrollbar-width: thin;
     scrollbar-color: #ff4444 #ffa8a8;
     border: #ffa8a8 solid 1px;
@@ -107,6 +111,7 @@ h2 {
     align-self: center;
     max-width: 324px;
     word-wrap: break-word;
+    margin: 20px 0;
 }
 
 .task__input {
@@ -115,6 +120,10 @@ h2 {
     outline: 0;
     transition: .5s;
     background: transparent;
+    word-wrap: break-word;
+    box-sizing: border-box;
+    resize: none;
+    margin: 20px 0;
 }
 
 .task__buttons {

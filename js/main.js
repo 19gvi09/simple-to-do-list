@@ -1,82 +1,66 @@
 // New Task section start //
 
-let newTaskInput = document.querySelector('#taskInputAdd');
-let buttonAdd = document.querySelector('#buttonAdd');
-let activeTaskList = document.querySelector('#activeTaskList');
-let completedTaskList = document.querySelector('#completedTaskList');
+let newTaskInput = $('#taskInputAdd');
+let buttonAdd = $('#buttonAdd');
+let activeTaskList = $('#activeTaskList');
+let completedTaskList = $('#completedTaskList');
 
 // Creating new task element
 function createItem() {
     // New task item
-    newItem = document.createElement('li');
-    newItem.classList.add('task');
+    newItem = $('<li>', {'class': 'task'});
 
     // Div for text
-    let div = document.createElement('div');
+    let div = $('<div>');
 
     // Checkbox
-    checkbox = document.createElement('i');
-    checkbox.classList.add('far', 'fa-square', 'task__checkbox');
+    checkbox = $('<i>', {'class': 'far fa-square task__checkbox'});
 
     // Task text
-    let taskText = document.createElement('p');
-    taskText.classList.add('task__text');
-    taskText.innerText = newTaskInput.value;
+    let taskText = $('<p>', {'class': 'task__text', text: newTaskInput.val()});
 
     // Task text editor
-    let taskTextEditor = document.createElement('input');
-    taskTextEditor.classList.add('task__input', 'hidden');
-    taskTextEditor.value = newTaskInput.value;
-    taskTextEditor.setAttribute('type', 'text');
-    taskTextEditor.id = 'taskTextEdit';
+    let taskTextEditor = $('<textarea>', {'class': 'task__input hidden', rows: '1', id: 'taskTextEdit'}).val(newTaskInput.val());
 
     // Packing div
-    
-    div.appendChild(taskText);
-    div.appendChild(taskTextEditor);
+    div.append(taskText);
+    div.append(taskTextEditor);
 
     // Div for task buttons
-    let divButtons = document.createElement('div');
-    divButtons.classList.add('task__buttons');
+    let divButtons = $('<div>', {'class': 'task__buttons'});
 
     // Edit button
-    buttonEdit = document.createElement('button');
-    buttonEdit.classList.add('task__button');
-    buttonEdit.id = 'buttonEdit';
-    buttonEdit.innerText = 'Edit';
+    buttonEdit = $('<button>', {'class': 'task__button', id: 'buttonEdit', text: 'Edit'});
 
     // Delete button
-    buttonDelete = document.createElement('button');
-    buttonDelete.classList.add('task__button');
-    buttonDelete.id = 'buttonDelete';
-    buttonDelete.innerText = 'Delete';
+    buttonDelete = $('<button>', {'class': 'task__button', id: 'buttonDelete', text: 'Delete'});
 
     // Packing div for task buttons
-    divButtons.appendChild(buttonEdit);
-    divButtons.appendChild(buttonDelete);
+    divButtons.append(buttonEdit);
+    divButtons.append(buttonDelete);
 
     // Packing task item
-    newItem.appendChild(checkbox);
-    newItem.appendChild(div);
-    newItem.appendChild(divButtons);
+    newItem.append(checkbox);
+    newItem.append(div);
+    newItem.append(divButtons);
 }
 
 // Adding new task element to DOM
 function addItem() {
-    if (newTaskInput.value === '') {
+    if (newTaskInput.val() === '') {
         alert('No input')
     }
     else {
         createItem();
         activeTaskList.prepend(newItem);
-        newTaskInput.value = '';
+        newTaskInput.val('');
     }
-    buttonDelete.addEventListener('click', deleteTask);
-    buttonEdit.addEventListener('click', editTask);
-    checkbox.addEventListener('click', checkTask);
+    buttonDelete.click(deleteTask);
+    buttonEdit.click(editTask);
+    checkbox.click(checkTask);
 }
 
-buttonAdd.addEventListener('click', addItem);
+buttonAdd.click(addItem);
 
 // 'Delete' button
 function deleteTask() {
@@ -85,7 +69,7 @@ function deleteTask() {
 
 // 'Edit' button
 function editTask() {
-    let taskEdit = this.parentElement.previousSibling.querySelector('input[type=text]');
+    let taskEdit = this.parentElement.previousSibling.querySelector('textarea');
     let taskText = taskEdit.previousSibling;
     if (taskEdit.classList.contains('hidden')) {
         taskText.classList.add('hidden');
@@ -118,68 +102,62 @@ function checkTask() {
 
 // Controls start //
 
-let buttonAll = document.querySelector('#buttonAll');
-let buttonActive = document.querySelector('#buttonActive');
-let buttonCompleted = document.querySelector('#buttonCompleted');
-let buttonClearCompleted = document.querySelector('#buttonClearCompleted');
-let buttonClearAll = document.querySelector('#buttonClearAll');
-let activeTasks = document.querySelector('#activeTasks');
-let completedTasks = document.querySelector('#completedTasks');
+let buttonAll = $('#buttonAll');
+let buttonActive = $('#buttonActive');
+let buttonCompleted = $('#buttonCompleted');
+let buttonClearCompleted = $('#buttonClearCompleted');
+let buttonClearAll = $('#buttonClearAll');
+let activeTasks = $('#activeTasks');
+let completedTasks = $('#completedTasks');
 
 // 'All' button
 function showAllTasks() {
-    if (activeTasks.classList.contains('hidden')) {
-        activeTasks.classList.remove('hidden');
+    if (activeTasks.hasClass('hidden')) {
+        activeTasks.removeClass('hidden');
     };
-    if (completedTasks.classList.contains('hidden')) {
-        completedTasks.classList.remove('hidden');
+    if (completedTasks.hasClass('hidden')) {
+        completedTasks.removeClass('hidden');
     }
 }
 
-buttonAll.addEventListener('click', showAllTasks);
+buttonAll.click(showAllTasks);
 
 // 'Active' button
 function showActiveTasks() {
-    if (activeTasks.classList.contains('hidden')) {
-        activeTasks.classList.remove('hidden');
+    if (activeTasks.hasClass('hidden')) {
+        activeTasks.removeClass('hidden');
     };
-    if (! completedTasks.classList.contains('hidden')) {
-        completedTasks.classList.add('hidden');
+    if (! completedTasks.hasClass('hidden')) {
+        completedTasks.addClass('hidden');
     }
 }
 
-buttonActive.addEventListener('click', showActiveTasks);
+buttonActive.click(showActiveTasks);
 
 // 'Completed' button
 function showCompletedTasks() {
-    if (! activeTasks.classList.contains('hidden')) {
-        activeTasks.classList.add('hidden');
+    if (! activeTasks.hasClass('hidden')) {
+        activeTasks.addClass('hidden');
     };
-    if (completedTasks.classList.contains('hidden')) {
-        completedTasks.classList.remove('hidden');
+    if (completedTasks.hasClass('hidden')) {
+        completedTasks.removeClass('hidden');
     }
 }
 
-buttonCompleted.addEventListener('click', showCompletedTasks);
+buttonCompleted.click(showCompletedTasks);
 
 // 'Clear completed' button
 function clearCompletedTasks() {
-    let e = completedTasks.querySelectorAll('li');
-    e.forEach(element => {
-        element.remove();
-    });;
+    completedTasks.find('li').remove();
 }
 
-buttonClearCompleted.addEventListener('click', clearCompletedTasks);
+buttonClearCompleted.click(clearCompletedTasks);
 
 // 'Clear all' button
 function clearAllTasks() {
-    let tasks = document.querySelector('#tasks')
-    let e = tasks.querySelectorAll('li');
-    e.forEach(element => {
-        element.remove();
-    });;
+    completedTasks.find('li').remove();
+    activeTasks.find('li').remove();
 }
 
-buttonClearAll.addEventListener('click', clearAllTasks);
+buttonClearAll.click(clearAllTasks);
 // Controls end //
